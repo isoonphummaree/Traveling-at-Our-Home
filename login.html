@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>เข้าสู่ระบบ | เที่ยวบ้านเรา</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-card {
+      max-width: 480px;
+      margin: 2rem auto;
+      padding: 2.25rem;
+      background: #FFFFFF;
+      border: 1px solid #BAE0EE;
+      border-top: 5px solid #1D4E6E;
+      border-radius: 0.85rem;
+      box-shadow: 0 8px 24px rgba(29, 78, 110, 0.08);
+    }
+    .login-card h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.75rem;
+      color: #14374E;
+    }
+    .login-subtitle {
+      margin: 0 0 1.5rem;
+      color: #475569;
+      font-size: 0.95rem;
+    }
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: #14374E;
+    }
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid #CBD5E1;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: #FFFFFF;
+    }
+    .password-wrap {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .toggle-btn {
+      padding: 0.7rem 1rem;
+      border: 1px solid #BAE0EE;
+      border-radius: 0.5rem;
+      background: #F0F9FF;
+      color: #14374E;
+      font-size: 0.9rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .toggle-btn:hover {
+      background: #E0F2FE;
+    }
+    .submit-login-btn {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: #0284C7;
+      color: #FFFFFF;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.4rem;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+      transition: background 0.2s ease;
+    }
+    .submit-login-btn:hover {
+      background: #0369A1;
+    }
+    .login-msg {
+      margin-top: 1.1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 0.5rem;
+      display: none;
+      font-size: 0.94rem;
+      font-weight: 500;
+      background: #E0F2FE;
+      color: #14374E;
+      border: 1px solid #0284C7;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <p class="site-name">เที่ยวบ้านเรา</p>
+      <nav aria-label="เมนูหลัก">
+        <ul>
+          <li><a href="index.html">หน้าแรก</a></li>
+          <li><a href="places.html">ที่เที่ยว</a></li>
+          <li><a href="food.html">อาหาร</a></li>
+          <li><a href="plan.html">วางแผนเที่ยว</a></li>
+          <li><a href="travel.html">ข้อมูลการเดินทาง</a></li>
+          <li><a href="login.html" aria-current="page">เข้าสู่ระบบ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="login-card" aria-labelledby="loginTitle">
+      <h1 id="loginTitle">เข้าสู่ระบบ</h1>
+      <p class="login-subtitle">ยินดีต้อนรับสู่เว็บไซต์เที่ยวบ้านเรา</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">ชื่อผู้ใช้</label>
+          <input class="form-input" type="text" id="username" name="username" placeholder="กรอกชื่อผู้ใช้" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">รหัสผ่าน</label>
+          <div class="password-wrap">
+            <input class="form-input" type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" required>
+            <button type="button" class="toggle-btn" id="togglePassword">แสดง</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="role">ประเภทผู้ใช้งาน</label>
+          <select class="form-select" id="role" name="role">
+            <option value="user">สมาชิก (User)</option>
+            <option value="admin">ผู้ดูแลระบบ (Admin)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-login-btn">เข้าสู่ระบบ</button>
+      </form>
+
+      <div id="loginMsg" class="login-msg" role="status"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>ไอศูรย์ ภุมรี 040 | เที่ยวบ้านเรา · ใบงานฝึกปฏิบัติวิชาการสร้างเว็บไซต์ทางธุรกิจ</p>
+  </footer>
+
+  <script>
+    const passwordInput = document.getElementById("password");
+    const toggleBtn = document.getElementById("togglePassword");
+    const loginForm = document.getElementById("loginForm");
+    const loginMsg = document.getElementById("loginMsg");
+
+    toggleBtn.addEventListener("click", () => {
+      const isHidden = passwordInput.type === "password";
+      passwordInput.type = isHidden ? "text" : "password";
+      toggleBtn.textContent = isHidden ? "ซ่อน" : "แสดง";
+    });
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const user = document.getElementById("username").value.trim();
+      const role = document.getElementById("role").value;
+      const roleLabel = role === "admin" ? "ผู้ดูแลระบบ (Admin)" : "สมาชิก (User)";
+      loginMsg.style.display = "block";
+      loginMsg.textContent = "เข้าสู่ระบบในฐานะ " + roleLabel + " (" + user + ")";
+    });
+  </script>
+</body>
+</html>
